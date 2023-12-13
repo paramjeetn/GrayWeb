@@ -1,12 +1,15 @@
+import  Login  from "./pages/login/Login";
+import React from 'react';
+import "./App.css"
+import Register from "./pages/register/Register";
 
-import './App.css';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      
+    <div>
+      <Register />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
