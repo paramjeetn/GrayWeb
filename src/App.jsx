@@ -1,15 +1,59 @@
 import  Login  from "./pages/login/Login";
-import React from 'react';
 import "./App.css"
+import {createBrowserRouter,Outlet,RouterProvider,} from "react-router-dom";
 import Register from "./pages/register/Register";
+import Profile from "./pages/profile/Profile";
+import Home from "./pages/home/Home";
+import RightBar from "./Components/rightbar/RightBar";
+import LeftBar from "./Components/leftBar/LeftBar";
+import Navbar from "./Components/navbar/Navbar";
 
-
-const App = () => {
+function App(){ 
+const Layout=()=>{
   return (
     <div>
-      <Register />
+      <Navbar />
+      <div style={{display:"flex"}}>
+       <LeftBar />
+       <Outlet />
+       <RightBar />
+      </div>
     </div>
   )
 }
 
-export default App
+  const router = createBrowserRouter([
+    {
+      path:"/",
+      element:<Layout/>,
+      children:[
+        {
+          path:"/",
+          element:<Home />
+        },
+        {
+          path:"/profile/:id",
+          element:<Profile />
+        }
+      ]
+    },
+    {
+      path: "/login",
+      element: <Login />,
+    },
+    {
+      path: "/register",
+      element: <Register />,
+    },
+  ]);
+
+
+  return (
+    <div>
+      <RouterProvider router={router} />
+    </div>
+  )
+}
+
+
+export default App;
