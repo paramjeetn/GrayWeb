@@ -53,7 +53,7 @@ const Profile = () => {
               </div>
               <div className="item">
                 <LanguageIcon />
-                <span>lama.dev</span>
+                
               </div>
             </div>
             <button>follow</button>
