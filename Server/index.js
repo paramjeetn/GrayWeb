@@ -10,6 +10,7 @@ import { MongoClient } from "mongodb";
 
 //config
 const app = express();
+app.use(express.json());
 const client = new MongoClient('mongodb+srv://paramjeetnpradhan:Paramjeet.826@cluster01.wmcwsfi.mongodb.net/');
 await client.connect();
 const db=client.db("DB2");
