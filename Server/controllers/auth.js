@@ -6,21 +6,19 @@ import User from "../models/User.js";
 export const register = async (req, res) => {
   try {
     
-      let firstName=`${req.body.firstName}`;
-      let lastName=req.body.lastName;
+      let name=req.body.name;      
       let email=req.body.email;
       let password=req.body.password;
-      console.log(password);
+      const user = await User.findOne({ email: email });
+      if (user) return res.status(400).json({ msg: "User already exist. " });
       
-    
-    
+      
     const salt = bcrypt.genSaltSync(10);
     const hashedPassword = bcrypt.hashSync(password, salt);
-    
+    console.log(hashedPassword);
 
     const newUser = new User({
-      firstName,
-      lastName,
+      name,
       email,
       password: hashedPassword,
       
@@ -38,14 +36,15 @@ export const register = async (req, res) => {
 //LOGGING IN
 export const login = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const email=req.body.email; 
+    const password = req.body.password;
     const user = await User.findOne({ email: email });
     if (!user) return res.status(400).json({ msg: "User does not exist. " });
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(400).json({ msg: "Invalid credentials. " });
 
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+    const token = jwt.sign({ id: user._id }, "somesuperhardtoguessstring");
     delete user.password;
     res.status(200).json({ token, user });
   } catch (err) {
@@ -54,5 +53,5 @@ export const login = async (req, res) => {
 };
 
 export const logout=async(req,res)=>{
-
+res.send("Hello")
 };
