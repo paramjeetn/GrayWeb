@@ -3,10 +3,10 @@ import mongoose from "mongoose";
 const UserSchema = new mongoose.Schema(
 
     { 
-          userId:{
+        userId:{
         type: Number,
          },
-        desc: {
+         commentDesc: {
             type: String,
             required: true,
         },

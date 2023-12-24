@@ -7,16 +7,10 @@ const UserSchema = new mongoose.Schema(
         userId:{
         type: Number,
          },
-        postDesc: {
-            type: String,
-            required: true,
-        },
+        
         img: {
             type: String,
             required: true,
-        },        
-        creationDate:{
-            type:Date,
         }
 
 
@@ -25,5 +19,5 @@ const UserSchema = new mongoose.Schema(
 
 );
 
-const Post = mongoose.model("Post", UserSchema);
-export default Post;
+const Stories = mongoose.model("Stories", UserSchema);
+export default Stories;

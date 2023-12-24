@@ -6,7 +6,7 @@ import User from "../models/User.js";
 export const register = async (req, res) => {
   try {
     
-      let name=req.body.name;      
+      let username=req.body.username;      
       let email=req.body.email;
       let password=req.body.password;
       const user = await User.findOne({ email: email });
@@ -15,15 +15,15 @@ export const register = async (req, res) => {
       
     const salt = bcrypt.genSaltSync(10);
     const hashedPassword = bcrypt.hashSync(password, salt);
-    console.log(hashedPassword);
+    
 
     const newUser = new User({
-      name,
+      username,
       email,
       password: hashedPassword,
       
     });
-    console.log(newUser.password);
+   
     const savedUser = await newUser.save();
 
     res.status(201).json(savedUser);
@@ -46,6 +46,7 @@ export const login = async (req, res) => {
 
     const token = jwt.sign({ id: user._id }, "somesuperhardtoguessstring");
     delete user.password;
+    
     res.status(200).json({ token, user });
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -53,5 +54,5 @@ export const login = async (req, res) => {
 };
 
 export const logout=async(req,res)=>{
-res.send("Hello")
+
 };
