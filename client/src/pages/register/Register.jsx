@@ -11,20 +11,22 @@ const Register = () => {
     name:"",
   });
   const [err, seterr]=useState(null);
+
   const handleChange=e=>{
     setInputs(prev=>({...prev,[e.target.name]:e.target.value}))
   };
-  console.log(inputs);
+  
+
   const handleClick= async e=>{
     e.preventDefault();
     try{
       await axios.post("http://localhost:8000/Server/auth/register",inputs);
     }catch(err){
-      seterr(err);
+      seterr(err.response.data.msg);
       
     }
   };
-  console.log(err);
+  
   return (
     <div className="register">
       <div className="card">
@@ -47,7 +49,7 @@ const Register = () => {
             <input type="email" placeholder="Email" value={inputs.email || ""} name="email" onChange={handleChange}/>
             <input type="password" placeholder="Password" value={inputs.password || ""} name="password" onChange={handleChange}/>
             <input type="text" placeholder="Name" value={inputs.name || ""} name="name" onChange={handleChange} />
-            
+            {err && err}
             <button onClick={handleClick}>Register</button>
           </form>
         </div>
