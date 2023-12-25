@@ -9,6 +9,11 @@ export const register = async (req, res) => {
       let username=req.body.username;      
       let email=req.body.email;
       let password=req.body.password;
+      if(typeof password == "undefined")
+{
+  console.log("empty password");
+} 
+      let name=req.body.name;
       const user = await User.findOne({ email: email });
       if (user) return res.status(400).json({ msg: "User already exist. " });
       
@@ -21,6 +26,7 @@ export const register = async (req, res) => {
       username,
       email,
       password: hashedPassword,
+      name,
       
     });
    

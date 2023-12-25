@@ -7,6 +7,7 @@ import likeRoutes from "./routes/likes.js";
 import authRoutes from "./routes/auth.js";
 import cookieParser from "cookie-parser";
 import mongoose from "mongoose";
+import cors from "cors";
 
 
 //config
@@ -14,6 +15,11 @@ const app = express();
 app.use(express.json());
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
+app.use(cors(
+    {
+        origin: "http://localhost:3000",
+      }
+));
 app.use(cookieParser());
 
 
