@@ -5,9 +5,13 @@ const UserSchema = new mongoose.Schema(
 
     {  
         userId:{
-        type: Number,
+        type: String,
          },
-        postDesc: {
+        name:{
+            type: String,
+            required: true,
+        },
+        desc: {
             type: String,
             required: true,
         },
