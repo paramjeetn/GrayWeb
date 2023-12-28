@@ -5,14 +5,14 @@ import User from "../models/User.js";
 export const createPost =async(req,res)=>{
     try {
         const _id=req.body._id
-        const postDesc=req.body.postDesc
+        const desc=req.body.desc
         const img=req.body.img;
         console.log(_id);
 
         const user = await User.findById(_id);
         const newPost=new Post({
             userId:_id,
-            postDesc,
+            desc,
             img,
             creationDate: new Date(),
             name:user.name,
