@@ -14,7 +14,7 @@ const UserSchema = new mongoose.Schema(
         creationDate:{
             type:Date,
         }, 
-        PostId:{  //the id given by mongoose to the specific post
+        PostId:{ 
             type:Number,
         }
 

@@ -14,7 +14,7 @@ export const register = async (req, res) => {
   console.log("empty password");
 } 
       let name=req.body.name;
-      const user = await User.findOne({ email: email });
+      const user = await User.findOne({ username: username });
       if (user) return res.status(400).json({ msg: "User already exist. " });
       
       
@@ -52,16 +52,14 @@ export const login = async (req, res) => {
 
     const token = jwt.sign({ id: user._id }, "somesuperhardtoguessstring");
     delete user.password;
+    console.log(token);
     
     res.cookie("acessToken",token,{
       httpOnly:true,
     })
     .status(200)
     .json(user);
-  //   res.status(200).json({ token, user });
-  // } catch (err) {
-  //   res.status(500).json({ error: err.message });
-  // }
+  
 }
 ;
 

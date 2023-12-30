@@ -8,16 +8,13 @@ const UserSchema = new mongoose.Schema(
         type: Number,
          },
          followerUserId:{
-            type: Number,
+            type: Array,
          },
          followedUserId:{
-            type: Number,
+            type: Array,
          },
         
-        img: {
-            type: String,
-            required: true,
-        },        
+         
         
 
 
