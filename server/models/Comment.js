@@ -4,25 +4,28 @@ const UserSchema = new mongoose.Schema(
 
     { 
         userId:{
-        type: Number,
+        type: String,
          },
-         commentDesc: {
+         desc: {
             type: String,
             required: true,
         },
         
-        creationDate:{
+        createdAt:{
             type:Date,
         }, 
-        PostId:{ 
-            type:Number,
+        postId:{ 
+            type:String,
         }
+
 
 
     }
 
+    //658a25e23c80e093d61faa61
 
+    //6590c6a63a210c8d09686938
 );
 
-const Post = mongoose.model("Post", UserSchema);
-export default Post;
+const Comment = mongoose.model("Comment", UserSchema);
+export default Comment;
