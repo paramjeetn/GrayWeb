@@ -6,9 +6,8 @@ import User from "../models/User.js";
 export const register = async (req, res) => {
   try {
     
-      let username=req.body.username;      
-      let email=req.body.email;
-      let password=req.body.password;
+      let username=req.body.username;   
+       let password=req.body.password;
       if(typeof password == "undefined")
 {
   console.log("empty password");
@@ -24,7 +23,7 @@ export const register = async (req, res) => {
 
     const newUser = new User({
       username,
-      email,
+      email:req.body.email,
       password: hashedPassword,
       name,
       
@@ -32,7 +31,7 @@ export const register = async (req, res) => {
    
     const savedUser = await newUser.save();
 
-    res.status(201).json(savedUser);
+    res.status(201).json("savedUser");
   } catch (err) {
     console.log(err);
     res.status(500).json({ error: err.message });
@@ -52,7 +51,7 @@ export const login = async (req, res) => {
 
     const token = jwt.sign({ id: user._id }, "somesuperhardtoguessstring");
     delete user.password;
-    console.log(token);
+    
     
     res.cookie("acessToken",token,{
       httpOnly:true,

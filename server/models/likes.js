@@ -5,12 +5,13 @@ const UserSchema = new mongoose.Schema(
 
     {  
         userId:{
-        type: Number,
+        type: String,
         required: true,
+        
          },
         
-        postIdostId: {
-            type: Number,
+        postId: {
+            type: String,
             required: true,
         }
 
@@ -20,5 +21,5 @@ const UserSchema = new mongoose.Schema(
 
 );
 
-const Likes = mongoose.model("Likes", UserSchema);
-export default Likes;
+const Like = mongoose.model("Like", UserSchema);
+export default Like;

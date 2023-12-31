@@ -1,7 +1,6 @@
 import Comment from "../models/Comment.js";
 import jwt from "jsonwebtoken"
 import moment from "moment"
-import User from "../models/User.js";
 export const getComments = async (req,res)=>{
     try {
         
@@ -22,25 +21,17 @@ export const getComments = async (req,res)=>{
             if(!token) return res.status(401).json("Not logged in!");
             jwt.verify(token,"somesuperhardtoguessstring",async(err,userInfo)=>{
                 if(err) return res.status(403).json("Token is not valid!");
-                
-                
-                const _id=userInfo.id;
-                const desc=req.body.desc;
-                const postId=req.body.postId;
-                console.log(postId);
-                //const user = await User.findById(_id);
-                
-                 const newComment=new Comment({
-                userId:_id,
-                desc,
-                postId,
+                                
+                const newComment=new Comment({
+                userId:userInfo.id,
+                desc:req.body.desc,
+                postId:req.body.postId,
                 createdAt: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
-                
                 
             });
             await newComment.save();
-            const comment = await Comment.find();
-            res.status(201).json(comment);
+            
+            res.status(201).json("comment created");
             })
            
         }

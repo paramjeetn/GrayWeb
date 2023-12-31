@@ -16,30 +16,13 @@ const Posts = () => {
   })
 
 
-// const [posts,setPosts]=useState([])
-// useEffect(()=>{
-//  async function fetchData(){
-//   await fetch("http://localhost:8000/Server/posts")
-//   .then((res)=>res.json())
-//   .then((data)=>{
-//     setPosts(data);
-//   })
-//   .catch((err)=>{
-//     console.log(err)
-//   });
-//  }
-//  fetchData();
-  
-// },[]);
-
-
 return (
   <div className="posts">
     {error
       ? "Something went wrong!"
       : isPending
       ? "loading"
-      : data.map((post) => <Post post={post} key={post.id} />)}
+      : data.map((post) => <Post post={post}  />)}
   </div>
 )
 };

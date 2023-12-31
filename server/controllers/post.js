@@ -14,7 +14,6 @@ export const createPost =async(req,res)=>{
             
             const _id=userInfo.id;
             const desc=req.body.desc;
-            console.log(desc);
             const img=req.body.img;
             const user = await User.findById(_id);
              const newPost=new Post({
@@ -26,9 +25,9 @@ export const createPost =async(req,res)=>{
             
         });
         await newPost.save();
-        const post = await Post.find();
-        console.log(post);
-        res.status(201).json(post);
+        
+        
+        res.status(201).json("Post created");
         })
        
         
