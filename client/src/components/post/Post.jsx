@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import Comments from "../comments/Comments";
 import { useContext, useState } from "react";
 import moment from "moment";
-import {useQuery} from "@tanstack/react-query"
+import {useQuery,useQueryClient,useMutation} from "@tanstack/react-query"
 import { makeRequest } from "../../axios.js";
 import { AuthContext } from "../../context/authContext.js";
 
@@ -23,9 +23,25 @@ const Post = ({ post }) => {
         return res.data;
         
       })
+  });
+
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation({
+    mutationFn: (liked)=>{
+      if(liked) return makeRequest.delete("/likes?postId="+post._id);
+      makeRequest.post("/likes",{postId:post._id});
+    },
+    onSuccess: () => {
+      // Invalidate and refetch
+      queryClient.invalidateQueries({ queryKey: ["likes"] })
+    },
   })
 
-console.log(currentUser._id);
+
+const handleLike=()=>{
+mutation.mutate(data && data.includes(currentUser._id))
+};
 
   return (
     <div className="post">
@@ -51,7 +67,8 @@ console.log(currentUser._id);
         </div>
         <div className="info">
           <div className="item">
-            {data && data.includes(currentUser._id) ? ( <FavoriteOutlinedIcon style={{color:"red"}}/>) :(  <FavoriteBorderOutlinedIcon />)}
+            {isPending? "loading" : data && data.includes(currentUser._id) ? ( <FavoriteOutlinedIcon style={{color:"red"}} onClick={handleLike}
+            />) :(  <FavoriteBorderOutlinedIcon onClick={handleLike}/>)}
             {data && data.length}Likes
           </div>
           <div className="item" onClick={() => setCommentOpen(!commentOpen)}>
