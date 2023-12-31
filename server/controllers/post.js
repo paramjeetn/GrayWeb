@@ -45,7 +45,7 @@ export const getPosts = async(req,res)=>{
         if(!token) return res.status(401).json("Not logged in!");
         jwt.verify(token,"somesuperhardtoguessstring",async(err,userInfo)=>{
             if(err) return res.status(403).json("Token is not valid!");
-        const post = await Post.find().sort({creationDate: 1 });
+        const post = await Post.find().sort({creationAt: -1 });
         res.status(200).json(post);
 
     })

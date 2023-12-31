@@ -7,7 +7,7 @@ import likeRoutes from "./routes/likes.js";
 import authRoutes from "./routes/auth.js";
 import cookieParser from "cookie-parser";
 import mongoose from "mongoose";
-
+import multer from "multer";
 
 
 //config
@@ -25,9 +25,22 @@ app.use(cors(
 ));
 app.use(cookieParser());
 
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, '../client/public/upload')
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now()+file.originalname)
+  }
+})
 
+const upload = multer({ storage: storage })
 mongoose.connect('mongodb+srv://paramjeetnpradhan:Paramjeet.826@cluster01.wmcwsfi.mongodb.net/DB2');
 
+app.post("/Server/upload",upload.single("file"),(req,res)=>{
+  const file=req.file;
+  res.status(200).json(file.filename);
+})
 app.use("/Server/auth", authRoutes);
 app.use("/Server/users", userRoutes); 
 app.use("/Server/posts", postRoutes);
