@@ -19,7 +19,7 @@ const Profile = () => {
   
   const {currentUser}=useContext(AuthContext);
   const userId=useLocation().pathname.split("/")[2];
-  console.log(userId);
+  
    const { isPending, error, data } = useQuery({
     queryKey: ['user'],
     queryFn: () =>
@@ -40,8 +40,8 @@ const Profile = () => {
 
   const mutation = useMutation({
     mutationFn: (following)=>{
-      if(following) return makeRequest.delete("/relationship?userId="+userId);
-      makeRequest.post("/relationship?userId="+userId);
+      if(following) return makeRequest.delete("/relationship?followedUserId="+userId);
+      makeRequest.post("/relationship?followedUserId="+userId);
     },
     onSuccess: () => {
       // Invalidate and refetch
@@ -54,7 +54,7 @@ const handleFollow=()=>{
 mutation.mutate(relationshipData  && relationshipData.includes(currentUser._id))
 };
 
-console.log(relationshipData);
+
   return (
     <> 
     {isPending? "loading"  :
