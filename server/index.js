@@ -5,6 +5,7 @@ import postRoutes from "./routes/posts.js";
 import commentRoutes from "./routes/comments.js";
 import likeRoutes from "./routes/likes.js";
 import authRoutes from "./routes/auth.js";
+import relationshipRoutes from "./routes/relationship.js"
 import cookieParser from "cookie-parser";
 import mongoose from "mongoose";
 import multer from "multer";
@@ -46,6 +47,7 @@ app.use("/Server/users", userRoutes);
 app.use("/Server/posts", postRoutes);
 app.use("/Server/comments", commentRoutes);
 app.use("/Server/likes", likeRoutes);
+app.use("/Server/relationship", relationshipRoutes);
 
 
 

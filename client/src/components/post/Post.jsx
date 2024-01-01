@@ -30,7 +30,7 @@ const Post = ({ post }) => {
   const mutation = useMutation({
     mutationFn: (liked)=>{
       if(liked) return makeRequest.delete("/likes?postId="+post._id);
-      makeRequest.post("/likes",{postId:post._id});
+      return makeRequest.post("/likes",{postId:post._id});
     },
     onSuccess: () => {
       // Invalidate and refetch

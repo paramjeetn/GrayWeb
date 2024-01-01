@@ -31,6 +31,9 @@ const UserSchema = new mongoose.Schema(
         city:{
             type: String,
         },
+        site:{
+            type:String,
+        }
 
     }
 
