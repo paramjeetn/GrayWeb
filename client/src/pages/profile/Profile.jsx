@@ -111,7 +111,7 @@ mutation.mutate(relationshipData  && relationshipData.includes(currentUser._id))
           <MoreVertIcon />
         </div>
       </div>
-    <Posts/>
+    <Posts userId={userId}/>
     </div>
   </div>
   </>}
