@@ -77,11 +77,8 @@ export const deletePost =async(req,res)=>{
             
             
             const _id=userInfo.id;
-            console.log("this is _id"+_id)
             const postId=req.query.postId;
-            console.log("this is the post Id "+postId)
             const postDb=await Post.findById({_id:postId});
-            console.log(postDb.userId)
             if(postDb.userId==_id){
                 await Post.deleteOne({_id:postId});
                 await Like.deleteMany({postId:postId});

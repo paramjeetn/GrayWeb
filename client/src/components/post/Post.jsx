@@ -17,6 +17,7 @@ const Post = ({ post }) => {
   const [commentOpen, setCommentOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const {currentUser} = useContext(AuthContext);
+  const [postDelete, setPostDelete] = useState(false);
   const { isPending, error, data } = useQuery({
     queryKey: ['likes',post._id],
     queryFn: () =>
@@ -74,9 +75,10 @@ deleteMutation.mutate(post._id)
               <span className="date">{moment(post.createdAt).fromNow()}</span>
             </div>
           </div>
-          <MoreHorizIcon onClick={()=>setMenuOpen(!menuOpen)} />
-          {menuOpen && <button onClick={handleDelete}>delete</button>}
-        </div>
+          <div className="postdelete" onClick={()=>setMenuOpen(!menuOpen)} >
+          {menuOpen==true ? ( <button onClick={handleDelete}>delete</button>) : <MoreHorizIcon onClick={()=>setMenuOpen(!menuOpen)} />}
+          </div>
+          </div>
         <div className="content">
           <p>{post.desc}</p>
           <img src={"./upload/"+post.img} alt="" />
